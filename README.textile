@@ -18,6 +18,7 @@ h3. @sorcery.register_wand(info)@
 ** power (number) - An arbeitrary number which is passed to spells whenever they are executed.
 
 *Example:*
+
 bc. sorcery.register_wand({
     name = "test:cool_wand",
     desc = "Cool Wand",
@@ -45,6 +46,7 @@ h3. @sorcery.register_spell(info)@
 ** on_use (function) - The function that executes whenever a player uses a wand while the spell is equipped. (arguments: itemstack, player, pointed_thing [the thing the player is pointing at while executing the spell], wand_power [the power of the equipped wand])
 
 *Example:*
+
 bc.. sorcery.register_spell({
     name = "test:brag_spell",
     desc = "Brag Spell",
