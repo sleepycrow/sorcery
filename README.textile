@@ -1,0 +1,69 @@
+h1. Sorcery
+
+This mod adds 3 wands, 4 spells and an API that allows for more to be created to minetest. Sorcery requires the "mana":https://forum.minetest.net/viewtopic.php?f=11&t=11154 mod.
+
+License: zlib license (see LICENSE file)
+
+h2. API
+
+h3. @sorcery.register_wand(info)@
+
+*Parameters:*
+* info (table)
+** name (string) - The item id of the wand, following the minetest item naming conventions.
+** desc (string) - The readable name of the wand
+** full_desc (string) - A short description of the wand, which will show up whenever a player right-clicks with it.
+** image (string) - The texture of the wand.
+** craft_recipe (table) - Same as in "minetest.register_craft":https://dev.minetest.net/register_craft
+** power (number) - An arbeitrary number which is passed to spells whenever they are executed.
+
+*Example:*
+bc. sorcery.register_wand({
+    name = "test:cool_wand",
+    desc = "Cool Wand",
+    full_desc = "A quick glance at the wand confirms that it is, indeed, very cool.",
+    image = "cool_wand.png",
+    power = 999,
+    craft_recipe = {
+        {"default:dirt"},
+        {"default:stick"},
+        {"default:stick"},
+    }
+})
+
+h3. @sorcery.register_spell(info)@
+
+
+*Parameters:*
+* info (table)
+** name (string) - The item id of the spell, following the minetest item naming conventions.
+** desc (string) - The readable name of the spell
+** full_desc (string) - A short description of the spell, which will show up whenever a player right-clicks with it.
+** image (string) - The texture of the spell.
+** craft_recipe (table) - Same as in "minetest.register_craft":https://dev.minetest.net/register_craft
+** mana_cost (number) - The amount of mana required to execute the spell.
+** on_use (function) - The function that executes whenever a player uses a wand while the spell is equipped. (arguments: itemstack, player, pointed_thing [the thing the player is pointing at while executing the spell], wand_power [the power of the equipped wand])
+
+*Example:*
+bc.. sorcery.register_spell({
+    name = "test:brag_spell",
+    desc = "Brag Spell",
+    full_desc = "Makes sure that everyone knows you're a sorcerer.",
+    image = "brag_spell.png",
+    mana_cost = 10,
+
+    craft_recipe = {
+        {"default:paper", "default:paper", "default:paper"},
+        {"default:apple", "default:apple", "default:apple"},
+        {"default:paper", "default:paper", "default:paper"}
+    },
+
+    on_use = function(itemstack, player, pointed_thing, wand_power)
+        if mana.subtract(player:get_player_name(), 10) then --try to subtract 10 mana from the player. if it's successful then...
+            minetest.chat_send_all(player:get_player_name() .. " has a tier " .. wand_power .. " wand!")
+        else --if 10 mana cannot be subtracted then...
+            minetest.chat_send_player(player:get_player_name(), "You do not have enough mana to execute this spell.")
+            return false
+        end
+    end
+})
