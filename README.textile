@@ -14,7 +14,7 @@ h3. @sorcery.register_wand(info)@
 ** desc (string) - The readable name of the wand
 ** full_desc (string) - A short description of the wand, which will show up whenever a player right-clicks with it.
 ** image (string) - The texture of the wand.
-** craft_recipe (table) - Same as in "minetest.register_craft":https://dev.minetest.net/register_craft
+** craft_recipe (table, optional) - Same as in "minetest.register_craft":https://dev.minetest.net/register_craft
 ** power (number) - An arbeitrary number which is passed to spells whenever they are executed.
 
 *Example:*
@@ -41,7 +41,7 @@ h3. @sorcery.register_spell(info)@
 ** desc (string) - The readable name of the spell
 ** full_desc (string) - A short description of the spell, which will show up whenever a player right-clicks with it.
 ** image (string) - The texture of the spell.
-** craft_recipe (table) - Same as in "minetest.register_craft":https://dev.minetest.net/register_craft
+** craft_recipe (table, optional) - Same as in "minetest.register_craft":https://dev.minetest.net/register_craft
 ** mana_cost (number) - The amount of mana required to execute the spell.
 ** on_use (function) - The function that executes whenever a player uses a wand while the spell is equipped. (arguments: itemstack, player, pointed_thing [the thing the player is pointing at while executing the spell], wand_power [the power of the equipped wand])
 
