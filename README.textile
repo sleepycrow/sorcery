@@ -61,11 +61,7 @@ bc.. sorcery.register_spell({
     },
 
     on_use = function(itemstack, player, pointed_thing, wand_power)
-        if mana.subtract(player:get_player_name(), 10) then --try to subtract 10 mana from the player. if it's successful then...
-            minetest.chat_send_all(player:get_player_name() .. " has a tier " .. wand_power .. " wand!")
-        else --if 10 mana cannot be subtracted then...
-            minetest.chat_send_player(player:get_player_name(), "You do not have enough mana to execute this spell.")
-            return false
-        end
+        minetest.chat_send_all(player:get_player_name() .. " has a tier " .. wand_power .. " wand!")
+        return true --always return true on success, or else the mana will not be subtracted!
     end
 })

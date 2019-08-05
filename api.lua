@@ -10,7 +10,13 @@ sorcery.register_wand = function(info)
             local playername = player:get_player_name()
 
             if sorcery.selected_spell[playername] ~= nil then
-                sorcery.selected_spell[playername].on_use(itemstack, player, pointed_thing, info.power)
+                if mana.get(playername) >= sorcery.selected_spell[playername].mana_cost then
+                    if sorcery.selected_spell[playername].on_use(itemstack, player, pointed_thing, info.power) then
+                        mana.subtract(playername, sorcery.selected_spell[playername].mana_cost)
+                    end
+                else
+                    minetest.chat_send_player(playername, "You do not have enough mana!")
+                end
             end
         end,
 

@@ -7,16 +7,12 @@ sorcery.register_spell({
     mana_cost = 50,
 
     on_use = function(itemstack, player, pointed_thing, wand_power)
-        if not mana.subtract(player:get_player_name(), 50) then
-            minetest.chat_send_player(player:get_player_name(), "You do not have enough mana to execute this spell.")
-            return false
-        end
-
         for _,object in ipairs(minetest.env:get_objects_inside_radius(player:getpos(), 5)) do
             if object:is_player() then
                 object:set_hp(object:get_hp() + (5 * wand_power))
             end
         end
+        return true
     end,
 
     craft_recipe = {
@@ -36,9 +32,10 @@ sorcery.register_spell({
 
     on_use = function(itemstack, player, pointed_thing, wand_power)
         if pointed_thing.type ~= "nothing" then
-            if mana.subtract(player:get_player_name(), 50) then
-                player:setpos(minetest.get_pointed_thing_position(pointed_thing, true))
-            end
+            player:setpos(minetest.get_pointed_thing_position(pointed_thing, true))
+            return true
+        else
+            return false
         end
     end,
 
@@ -62,13 +59,14 @@ sorcery.register_spell({
 
     on_use = function(itemstack, player, pointed_thing, wand_power)
         if pointed_thing.type == "object" then
-            if mana.subtract(player:get_player_name(), 100) then
-                local obj = pointed_thing.ref
-                local pos = obj:getpos()
-                local time = wand_power
+            local obj = pointed_thing.ref
+            local pos = obj:getpos()
+            local time = wand_power
 
-                table.insert(sorcery.paralyzation_spell.paralyzed, {obj=obj, pos=pos, delta=0, time=time})
-            end
+            table.insert(sorcery.paralyzation_spell.paralyzed, {obj=obj, pos=pos, delta=0, time=time})
+            return true
+        else
+            return false
         end
     end,
 
@@ -103,13 +101,12 @@ sorcery.register_spell({
 
     on_use = function(itemstack, player, pointed_thing, wand_power)
         if pointed_thing.type == "object" then
-            if mana.subtract(player:get_player_name(), 150) then
-                local obj = pointed_thing.ref
-                local time = wand_power
-                local damage = wand_power
+            local obj = pointed_thing.ref
+            local time = wand_power
+            local damage = wand_power
 
-                table.insert(sorcery.curse_spell.cursed, {obj=obj, damage=damage, delta=0, time=time, frequency=frequency})
-            end
+            table.insert(sorcery.curse_spell.cursed, {obj=obj, damage=damage, delta=0, time=time, frequency=frequency})
+            return true
         end
     end,
 
@@ -127,6 +124,7 @@ minetest.register_globalstep(function(dtime)
     if delta >= 1 then
         for index, value in pairs(sorcery.curse_spell.cursed) do
             if value.delta < value.time then
+                print(value.obj:get_pos().x)
                 value.obj:set_hp(value.obj:get_hp() - value.damage)
                 value.delta = value.delta + delta
             else
