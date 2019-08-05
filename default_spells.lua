@@ -8,7 +8,7 @@ sorcery.register_spell({
 
     on_use = function(itemstack, player, pointed_thing, wand_power)
         for _,object in ipairs(minetest.env:get_objects_inside_radius(player:getpos(), 5)) do
-            if object:is_player() then
+            if object:is_player() and object:get_hp() > 0 then
                 object:set_hp(object:get_hp() + (5 * wand_power))
             end
         end
