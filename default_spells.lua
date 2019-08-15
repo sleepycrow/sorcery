@@ -22,6 +22,35 @@ sorcery.register_spell({
     }
 })
 
+-- resurrection spell
+sorcery.register_spell({
+    name = "sorcery:resurrection_spell",
+    desc = "Resurrection Spell",
+    full_desc = "Some say it's unfair. Some say it's heretical. Some don't care.",
+    image = "placeholder_scroll.png",
+    mana_cost = 150,
+
+    on_use = function(itemstack, player, pointed_thing, wand_power)
+        if pointed_thing.type == "object" and pointed_thing.ref:is_player() and pointed_thing.ref:get_hp() <= 0 then
+            pointed_thing.ref:set_hp(3 * wand_power)
+
+            minetest.show_formspec(pointed_thing.ref:get_player_name(), "sorcery:resurrection_notif",
+                "size[11,5.5]" ..
+                "label[3.9,1.35;You've been resurrected!]" ..
+                "button_exit[4,3;3,0.5;btn_ok;Ok]")
+            return true
+        else
+            return false
+        end
+    end,
+
+    craft_recipe = {
+        {"default:paper", "default:paper", "default:paper"},
+        {"default:diamond", "default:apple", "default:diamond"},
+        {"default:paper", "default:paper", "default:paper"}
+    }
+})
+
 -- teleportation spell
 sorcery.register_spell({
     name = "sorcery:teleportation_spell",
