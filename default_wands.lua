@@ -1,3 +1,29 @@
+--- wand cores
+minetest.register_craftitem("sorcery:basic_core", {description = "Basic Wand Core", inventory_image = "basic_core.png"})
+minetest.register_craft({output = "sorcery:basic_core",
+    recipe = {
+        {"", "default:glass", ""},
+        {"default:glass", "default:torch", "default:glass"},
+        {"", "default:glass", ""}
+    }})
+
+minetest.register_craftitem("sorcery:mese_core", {description = "Mese Wand Core", inventory_image = "mese_core.png"})
+minetest.register_craft({output = "sorcery:mese_core",
+    recipe = {
+        {"", "default:obsidian_glass", ""},
+        {"default:obsidian_glass", "default:mese_crystal", "default:obsidian_glass"},
+        {"", "default:obsidian_glass", ""}
+    }})
+
+minetest.register_craftitem("sorcery:diamond_core", {description = "Diamond Wand Core", inventory_image = "diamond_core.png"})
+minetest.register_craft({output = "sorcery:diamond_core",
+    recipe = {
+        {"", "default:obsidian_glass", ""},
+        {"default:obsidian_glass", "default:diamond", "default:obsidian_glass"},
+        {"", "default:obsidian_glass", ""}
+    }})
+
+--- the actual wands
 sorcery.register_wand({
     name = "sorcery:basic_wand",
     desc = "Basic Wand",
@@ -5,7 +31,7 @@ sorcery.register_wand({
     image = "basic_wand.png",
     power = 1,
     craft_recipe = {
-        {"default:glass"},
+        {"sorcery:basic_core"},
         {"default:stick"},
         {"default:stick"},
     }
@@ -18,7 +44,7 @@ sorcery.register_wand({
     image = "mese_wand.png",
     power = 2,
     craft_recipe = {
-        {"default:mese"},
+        {"sorcery:mese_core"},
         {"default:mese_crystal_fragment"},
         {"default:mese_crystal_fragment"}
     }
@@ -31,7 +57,7 @@ sorcery.register_wand({
     image = "diamond_wand.png",
     power = 3,
     craft_recipe = {
-        {"default:diamond"},
+        {"sorcery:diamond_core"},
         {"default:obsidian_shard"},
         {"default:obsidian_shard"}
     }
