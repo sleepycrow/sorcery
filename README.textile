@@ -1,11 +1,10 @@
 h1. Sorcery
 
-This mod adds 3 wands, 4 spells and an API that allows for more to be created to minetest. Sorcery requires the "mana":https://forum.minetest.net/viewtopic.php?f=11&t=11154 mod.
+Sorcery is a dead-simple magic mod. It adds a few craftable wands and spells, as well as a simple API to add more. Sorcery requires the "mana":https://forum.minetest.net/viewtopic.php?f=11&t=11154 mod.
 
-h2. License Info
+h2. Usage
 
-Code: zlib license (see LICENSE file)
-Textures: "CC0":https://creativecommons.org/publicdomain/zero/1.0/deed.en
+Left-click with a spell in hand to equip it, then left-click with a wand in hand to use the currently equipped spell. It's that simple. You can also right-click with either a wand or spell in hand to read a short description of it.
 
 h2. API
 
@@ -68,3 +67,8 @@ bc.. sorcery.register_spell({
         return true --always return true on success, or else the mana will not be subtracted!
     end
 })
+
+h2. License Info
+
+Code: zlib license (see LICENSE file)
+Textures: "CC0":https://creativecommons.org/publicdomain/zero/1.0/deed.en
