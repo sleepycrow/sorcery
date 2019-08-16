@@ -2,7 +2,10 @@ h1. Sorcery
 
 This mod adds 3 wands, 4 spells and an API that allows for more to be created to minetest. Sorcery requires the "mana":https://forum.minetest.net/viewtopic.php?f=11&t=11154 mod.
 
-License: zlib license (see LICENSE file)
+h2. License Info
+
+Code: zlib license (see LICENSE file)
+Textures: "CC0":https://creativecommons.org/publicdomain/zero/1.0/deed.en
 
 h2. API
 
