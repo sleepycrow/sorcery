@@ -27,7 +27,7 @@ sorcery.register_spell({
     name = "sorcery:resurrection_spell",
     desc = "Resurrection Spell",
     full_desc = "Some say it's unfair. Some say it's heretical. Some don't care.",
-    image = "placeholder_scroll.png",
+    image = "resurrection_spell.png",
     mana_cost = 150,
 
     on_use = function(itemstack, player, pointed_thing, wand_power)
