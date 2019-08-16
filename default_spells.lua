@@ -141,7 +141,7 @@ sorcery.register_spell({
 
     craft_recipe = {
         {"default:paper", "default:paper", "default:paper"},
-        {"default:sword_wood", "default:sword_wood", "default:sword_wood"},
+        {"default:sword_stone", "default:sword_steel", "default:sword_stone"},
         {"default:paper", "default:paper", "default:paper"}
     }
 })
